@@ -90,4 +90,20 @@ describe('Slot', function testSlotBuilder() {
         .addSize('728.999', '-90.2');
     assert.deepEqual(slot.sizes, [ [300, 0], [0, 0], [0, 600], [728, 90] ], 'dimensions not equal');
   });
+
+  it('will allow additional custom properties', function() {
+    var CUSTOM_CONFIG = {
+      name: '/id/s1',
+      elementId: 'elId',
+      sizes: [[50, 50]],
+      bidProviders: ['bp1'],
+      slotParams: {
+        p1: 'v1'
+      }
+    };
+
+    var slot = Slot.fromObject(CUSTOM_CONFIG);
+    assert.isNotNull(slot);
+    assert.isTrue(slot.slotParams.p1 === 'v1', 'custom params not set');
+  });
 });
